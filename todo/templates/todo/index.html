@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ToDo List</title>
+</head>
+<body>
+
+    <h1>My Tasks</h1>
+
+    {% for task in tasks %}
+        <p>
+            {{ task.title }} - 
+            {% if task.completed %}
+                ✅ Completed
+            {% else %}
+                ❌ Pending
+            {% endif %}
+        </p>
+    {% endfor %}
+
+</body>
+</html>
