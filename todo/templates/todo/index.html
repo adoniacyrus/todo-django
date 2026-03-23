@@ -1,22 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>ToDo List</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <h1>My Tasks</h1>
+    <h2>Add Task</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" name="title" placeholder="Enter task" />
+      <button type="submit">Add</button>
+    </form>
 
     {% for task in tasks %}
-        <p>
-            {{ task.title }} - 
-            {% if task.completed %}
-                ✅ Completed
-            {% else %}
-                ❌ Pending
-            {% endif %}
-        </p>
-    {% endfor %}
+    <p>
+      <span
+        style="{% if task.completed %}text-decoration: line-through;{% endif %}"
+      >
+        {{ task.title }}
+      </span>
 
-</body>
+      <a href="{% url 'complete' task.id %}">✔</a>
+      <a href="{% url 'delete' task.id %}">❌</a>
+    </p>
+    {% endfor %}
+  </body>
 </html>
