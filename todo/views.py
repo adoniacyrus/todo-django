@@ -24,3 +24,15 @@ def delete_task(request, id):
     task = Task.objects.get(id=id)
     task.delete()
     return redirect('index')
+
+def edit_task(request, id):
+    task = Task.objects.get(id=id)
+
+    if request.method == "POST":
+        title = request.POST.get("title")
+        if title:
+            task.title = title
+            task.save()
+        return redirect('index')
+
+    return render(request, 'todo/edit.html', {'task': task})
